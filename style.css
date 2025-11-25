@@ -242,9 +242,49 @@ a {
     margin-bottom: 60px;
 }
 
+/* =========================================
+   修正箇所：サブロゴ（Sweet & Bitter）のデザイン
+   ========================================= */
+
+/* 基本スタイル（メインロゴと同様のリッチな円形） */
 .sub-logo {
-    width: 200px;
-    margin: 0 auto 10px;
+    width: 160px;  /* メイン(200px)より少し控えめなサイズ */
+    height: 160px; /* 正方形を維持 */
+    object-fit: cover;
+    margin: 0 auto 20px;
+    border-radius: 50%; /* 完全な円形 */
+    
+    /* ガラス細工のような枠線と影 */
+    border: 4px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 
+        0 0 15px rgba(255, 255, 255, 0.8), /* 内側の発光 */
+        0 8px 25px rgba(0, 0, 0, 0.1),     /* 外側の影 */
+        inset 0 0 10px rgba(255, 255, 255, 0.3); /* 立体感 */
+
+    /* ふわふわ浮かぶアニメーション（少しタイミングをずらす） */
+    animation: logo-float 6s ease-in-out infinite;
+    animation-delay: -1s; /* メインロゴと動きを少しずらして自然に */
+    transition: all 0.4s ease;
+}
+
+/* ホバー時の動き（共通） */
+.sub-logo:hover {
+    transform: scale(1.08) translateY(-5px);
+    border-color: rgba(255, 255, 255, 1);
+}
+
+/* Sweet（ピンク）エリアのロゴのホバー色 */
+.sweet-theme .sub-logo:hover {
+    box-shadow: 
+        0 0 30px rgba(230, 143, 172, 0.7), /* ピンクの強い光 */
+        0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Bitter（ブルー）エリアのロゴのホバー色 */
+.bitter-theme .sub-logo:hover {
+    box-shadow: 
+        0 0 30px rgba(93, 117, 153, 0.7), /* ブルーの強い光 */
+        0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
 .hashtag {
