@@ -1,20 +1,20 @@
 /* =========================================
-   1. 基本設定 (Base Settings)
+   1. Base Settings & Fonts
    ========================================= */
 :root {
-    --text-color: #4a4a4a;
-    --accent-sweet: #e68fac; /* 大人っぽいピンク */
-    --accent-bitter: #5d7599; /* クールなブルーグレー */
-    --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    --text-color: #333;
+    --text-muted: #777;
+    --accent-sweet: #e68fac; 
+    --accent-bitter: #5d7599; 
+    --bg-gradient: linear-gradient(180deg, #fffafc 0%, #f3f4f6 100%);
     
-    /* フォント設定 */
     --font-serif: 'Shippori Mincho', serif;
     --font-round: 'Zen Maru Gothic', sans-serif;
+    --font-script: 'Allura', cursive; /* 筆記体追加 */
     
-    /* ガラスモーフィズム用の変数 */
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: 1px solid rgba(255, 255, 255, 0.8);
-    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.9);
+    --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.05);
 }
 
 body {
@@ -22,399 +22,316 @@ body {
     font-family: var(--font-round);
     color: var(--text-color);
     background: var(--bg-gradient);
-    line-height: 1.8;
-    background-attachment: fixed; /* 背景を固定して奥行きを出す */
+    line-height: 2;
     overflow-x: hidden;
 }
 
-h1, h2, h3 {
-    font-family: var(--font-serif);
-    letter-spacing: 0.08em;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.3s ease;
-}
+h1, h2, h3 { font-family: var(--font-serif); letter-spacing: 0.1em; }
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
 /* =========================================
-   2. 背景アニメーション (Background Animation)
+   2. Effects (Noise & Loader)
    ========================================= */
-.bg-decoration {
+
+/* フィルムノイズ加工（画面全体の質感アップ） */
+.noise-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: -1;
-    overflow: hidden;
+    top: 0; left: 0; width: 100%; height: 100%;
     pointer-events: none;
+    z-index: 900;
+    opacity: 0.05;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
 }
 
-.blob {
-    position: absolute;
+/* 背景のキラキラパーティクル */
+.particles span {
+    position: fixed;
+    bottom: -50px;
+    background: transparent;
     border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.6;
-    animation: float 20s infinite ease-in-out;
+    pointer-events: none;
+    box-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(230,143,172,0.4);
+    animation: rise 15s infinite linear;
+    z-index: -1;
+}
+.particles span:nth-child(1) { left: 10%; width: 4px; height: 4px; animation-duration: 10s; }
+.particles span:nth-child(2) { left: 20%; width: 6px; height: 6px; animation-duration: 14s; animation-delay: 2s; }
+.particles span:nth-child(3) { left: 35%; width: 3px; height: 3px; animation-duration: 12s; animation-delay: 4s; }
+.particles span:nth-child(4) { left: 50%; width: 5px; height: 5px; animation-duration: 16s; }
+.particles span:nth-child(5) { left: 65%; width: 4px; height: 4px; animation-duration: 11s; animation-delay: 1s; }
+.particles span:nth-child(6) { left: 80%; width: 7px; height: 7px; animation-duration: 18s; animation-delay: 3s; }
+/* ...もっと増やしてもOK */
+
+@keyframes rise {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { transform: translateY(-120vh) scale(0); opacity: 0; }
 }
 
-.blob-1 {
-    width: 400px;
-    height: 400px;
-    background: #ffe0e9;
-    top: -100px;
-    left: -100px;
+/* オープニングローダー */
+#loader {
+    position: fixed;
+    inset: 0;
+    background: #fff;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
 }
-
-.blob-2 {
-    width: 500px;
-    height: 500px;
-    background: #e0f2ff;
-    bottom: -100px;
-    right: -100px;
-    animation-delay: -5s;
+#loader.loaded {
+    opacity: 0;
+    visibility: hidden;
 }
-
-@keyframes float {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(30px, 50px); }
-}
+.loader-content { text-align: center; }
+.loader-logo { width: 100px; margin: 0 auto 20px; animation: pulse 2s infinite; }
+@keyframes pulse { 0% { opacity: 0.6; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1.05); } 100% { opacity: 0.6; transform: scale(0.95); } }
 
 /* =========================================
-   3. ヒーローセクション (Hero Section)
+   3. Hero Section
    ========================================= */
 .hero {
-    min-height: 90vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     padding: 20px;
 }
 
-.glass-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border: var(--glass-border);
-    padding: 60px 40px;
+.hero-content {
     text-align: center;
-    box-shadow: var(--shadow);
     max-width: 600px;
     width: 100%;
+    z-index: 10;
 }
 
-/* メインロゴのデザイン */
+.logo-wrapper {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    margin: 0 auto 40px;
+}
+
 .main-logo {
-    width: 200px;
-    height: 200px;
+    width: 100%; height: 100%;
     object-fit: cover;
-    margin: 0 auto 30px;
-    border-radius: 50%; /* 完全な円形 */
-    
-    /* ガラス風エフェクト */
-    border: 5px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 
-        0 0 20px rgba(255, 255, 255, 0.8),
-        0 10px 30px rgba(0, 0, 0, 0.15),
-        inset 0 0 15px rgba(255, 255, 255, 0.3);
-    
-    /* 浮遊アニメーション */
-    animation: logo-float 6s ease-in-out infinite;
-    transition: all 0.5s ease;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.8);
+    box-shadow: 0 0 40px rgba(255,255,255,0.8), inset 0 0 20px rgba(255,255,255,0.4);
+    animation: float 6s ease-in-out infinite;
 }
 
-.main-logo:hover {
-    transform: scale(1.05);
-    box-shadow: 
-        0 0 30px rgba(230, 143, 172, 0.6),
-        0 15px 40px rgba(0, 0, 0, 0.2);
-    border-color: rgba(255, 255, 255, 0.8);
-}
-
-@keyframes logo-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+.hero-title {
+    font-family: var(--font-script);
+    font-size: 4rem;
+    font-weight: 400;
+    margin: 0;
+    background: linear-gradient(45deg, var(--accent-sweet), var(--accent-bitter));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
 }
 
 .hero-subtitle {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 40px;
+    font-size: 1.2rem;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    margin-top: 20px;
 }
 
-/* 抽選ボタン (CTA) */
-.cta-container {
-    display: flex;
+/* Scroll Down Indicator */
+.scroll-down {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #aaa;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    animation: bounce 2s infinite;
+}
+.scroll-down::after {
+    content: '';
+    display: block;
+    width: 1px; height: 50px;
+    background: #ccc;
+    margin: 10px auto 0;
+}
+@keyframes bounce { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 10px); } }
+
+/* CTA Button */
+.btn-primary {
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
-}
-
-.btn-primary {
-    display: inline-block;
-    background: linear-gradient(45deg, var(--accent-sweet), var(--accent-bitter));
-    color: white;
-    padding: 15px 40px;
+    background: white;
+    padding: 15px 60px;
     border-radius: 50px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    transform: translateY(0);
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(230, 143, 172, 0.2);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    margin-top: 40px;
 }
+.btn-text { font-size: 1.1rem; font-weight: bold; color: #444; }
+.btn-sub { font-size: 0.7rem; color: var(--accent-sweet); letter-spacing: 0.1em; margin-top: 2px; }
 
 .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    filter: brightness(1.1);
-}
-
-.cta-note {
-    font-size: 0.8rem;
-    color: #888;
-    margin-top: 15px;
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(230, 143, 172, 0.3);
 }
 
 /* =========================================
-   4. メインコンテンツ (Main Content)
+   4. Sections & Scroll Animations
    ========================================= */
 .section-container {
-    max-width: 1100px;
-    margin: 0 auto 100px;
+    max-width: 1000px;
+    margin: 0 auto 120px;
     padding: 0 20px;
 }
 
-/* イベント情報パネル */
+/* Scroll Trigger Class */
+.js-scroll-trigger {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s cubic-bezier(0.2, 1, 0.3, 1);
+}
+.js-scroll-trigger.is-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .glass-panel {
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(5px);
-    border-radius: 20px;
-    padding: 50px;
-    border: 1px solid rgba(255,255,255,0.4);
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-radius: 30px;
+    padding: 60px;
+    border: var(--glass-border);
+    box-shadow: var(--shadow-soft);
 }
 
 .section-title {
     text-align: center;
-    font-size: 2.2rem;
-    color: #333;
-    margin-bottom: 50px;
-    position: relative;
-}
-
-.section-title::after {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 3px;
-    background: #ccc;
-    margin: 15px auto 0;
+    font-size: 2rem;
+    margin-bottom: 60px;
 }
 
 .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 30px;
-    text-align: center;
-}
-
-.info-item h3 {
-    font-size: 1.2rem;
-    color: var(--accent-bitter);
-    margin-bottom: 15px;
-}
-
-.info-item.warning h3 {
-    color: #c75c5c;
-}
-
-/* =========================================
-   5. キャストセクション (Cast Layout)
-   ========================================= */
-.category-header {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-/* サブロゴ（Sweet / Bitter）のデザイン */
-.sub-logo {
-    width: 160px;  /* メインより少し小さく */
-    height: 160px; /* 正方形を維持 */
-    object-fit: cover;
-    margin: 0 auto 20px;
-    border-radius: 50%; /* 円形 */
-    
-    /* ガラス風エフェクト */
-    border: 4px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 
-        0 0 15px rgba(255, 255, 255, 0.8),
-        0 8px 25px rgba(0, 0, 0, 0.1),
-        inset 0 0 10px rgba(255, 255, 255, 0.3);
-
-    /* 浮遊アニメーション */
-    animation: logo-float 6s ease-in-out infinite;
-    animation-delay: -1s; /* メインと少しタイミングをずらす */
-    transition: all 0.4s ease;
-}
-
-.sub-logo:hover {
-    transform: scale(1.08) translateY(-5px);
-    border-color: rgba(255, 255, 255, 1);
-}
-
-/* Sweetのロゴホバー時：ピンク発光 */
-.sweet-theme .sub-logo:hover {
-    box-shadow: 
-        0 0 30px rgba(230, 143, 172, 0.7),
-        0 15px 30px rgba(0, 0, 0, 0.15);
-}
-
-/* Bitterのロゴホバー時：ブルー発光 */
-.bitter-theme .sub-logo:hover {
-    box-shadow: 
-        0 0 30px rgba(93, 117, 153, 0.7),
-        0 15px 30px rgba(0, 0, 0, 0.15);
-}
-
-.hashtag {
-    display: inline-block;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    letter-spacing: 0.1em;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-
-.sweet-theme .hashtag { color: var(--accent-sweet); }
-.bitter-theme .hashtag { color: var(--accent-bitter); }
-
-.cast-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 40px;
 }
 
-/* キャストカードのデザイン */
+.info-item { text-align: center; }
+.info-label {
+    display: block;
+    font-family: var(--font-script);
+    font-size: 1.5rem;
+    color: #ccc;
+    margin-bottom: -10px;
+}
+.info-item h3 { font-size: 1.2rem; margin-bottom: 10px; }
+.small-text { font-size: 0.8rem; color: #888; }
+.warning h3 { color: #d66; }
+
+/* =========================================
+   5. Cast Layout (Modern)
+   ========================================= */
+.category-header { text-align: center; margin-bottom: 80px; }
+.category-title { font-family: var(--font-script); font-size: 3rem; margin: 10px 0; font-weight: 400; }
+
+.logo-wrapper-sm {
+    width: 100px; height: 100px; margin: 0 auto;
+    border-radius: 50%;
+    padding: 5px;
+    background: rgba(255,255,255,0.5);
+}
+.sub-logo {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+    animation: float 5s infinite ease-in-out reverse;
+}
+.sweet-theme .category-title { color: var(--accent-sweet); }
+.bitter-theme .category-title { color: var(--accent-bitter); }
+
+.cast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+}
+
 .cast-card {
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    transition: all 0.4s ease;
-    border: 1px solid rgba(0,0,0,0.02);
-}
-
-.cast-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-}
-
-.card-image {
-    height: 350px;
-    overflow: hidden;
     position: relative;
+    background: white;
+    border-radius: 20px; /* ここを大きくしすぎない */
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    transition: transform 0.4s ease;
+}
+
+/* 画像エリア */
+.card-image {
+    height: 380px;
+    position: relative;
+    overflow: hidden;
 }
 
 .card-image img {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     object-fit: cover;
-    object-position: top center;
-    transition: transform 0.5s ease;
+    object-position: center top;
+    transition: transform 0.8s ease;
 }
 
-.cast-card:hover .card-image img {
-    transform: scale(1.05);
+.card-image .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 50%);
+    opacity: 0.6;
+    transition: opacity 0.4s;
 }
+
+.cast-card:hover .card-image img { transform: scale(1.08); }
+.cast-card:hover .card-image .overlay { opacity: 0.3; }
 
 .card-content {
-    padding: 25px 30px;
+    padding: 30px;
+    text-align: center;
 }
 
 .card-content h3 {
-    margin: 0 0 15px;
+    margin: 0 0 20px;
     font-size: 1.4rem;
-    border-bottom: 2px solid;
     display: inline-block;
-    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
 }
-
-.sweet-theme .card-content h3 { border-color: #ffe0e9; color: var(--accent-sweet); }
-.bitter-theme .card-content h3 { border-color: #e0f2ff; color: var(--accent-bitter); }
 
 .quote {
     font-size: 0.95rem;
     color: #666;
-    margin: 0;
-    white-space: pre-line;
+    font-style: italic;
+    font-family: var(--font-serif);
 }
 
 /* =========================================
-   6. フッター (Footer)
+   6. Footer & Mobile
    ========================================= */
-footer {
-    padding: 60px 20px;
-    text-align: center;
-}
-
+footer { padding: 50px 20px; text-align: center; }
 .footer-glass {
-    background: #333;
-    color: white;
-    padding: 50px;
-    border-radius: 30px;
-    max-width: 900px;
-    margin: 0 auto;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    background: #222; color: #fff;
+    padding: 60px 20px; border-radius: 30px;
+    max-width: 900px; margin: 0 auto;
 }
+.footer-links { display: flex; justify-content: center; gap: 20px; margin: 30px 0; }
+.footer-links a { color: #fff; border: 1px solid #555; padding: 10px 25px; border-radius: 50px; font-size: 0.9rem; }
+.footer-links a:hover { background: white; color: #222; border-color: white; }
 
-.footer-links {
-    margin: 30px 0;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-}
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-.footer-links a {
-    background: rgba(255,255,255,0.1);
-    padding: 10px 25px;
-    border-radius: 50px;
-    border: 1px solid rgba(255,255,255,0.2);
-    font-size: 0.9rem;
-}
-
-.footer-links a:hover {
-    background: white;
-    color: #333;
-}
-
-.copyright {
-    font-size: 0.8rem;
-    opacity: 0.6;
-}
-
-/* =========================================
-   7. スマホ対応 (Responsive Design)
-   ========================================= */
 @media (max-width: 768px) {
-    .hero { min-height: 80vh; }
-    
-    .glass-card { padding: 40px 20px; }
-    
-    /* スマホではロゴを少し小さく */
-    .main-logo { width: 150px; height: 150px; }
-    .sub-logo { width: 130px; height: 130px; }
-    
-    .section-title { font-size: 1.8rem; }
-    
-    .card-image { height: 280px; }
-    
-    .footer-glass { padding: 30px 15px; border-radius: 0; }
+    .hero-title { font-size: 3rem; }
+    .glass-panel { padding: 30px 20px; }
+    .cast-grid { gap: 30px; }
+    .card-image { height: 300px; }
 }
