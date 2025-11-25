@@ -5,74 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ephemeral Sugar - Official HP</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&family=Zen+Maru+Gothic:wght@300;500;700&family=Allura&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="bg-decoration">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
+    <div id="loader">
+        <div class="loader-content">
+            <img src="image/es.png" alt="Loading..." class="loader-logo">
+            <p>Loading your sugar world...</p>
+        </div>
+    </div>
+
+    <div class="noise-overlay"></div>
+
+    <div class="particles">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
     </div>
 
     <header class="hero">
-        <div class="hero-content glass-card">
-            <img src="image/es.png" alt="Ephemeral Sugar Logo" class="main-logo">
-            <p class="hero-subtitle">あなただけの世界で、あなただけのお砂糖を。</p>
+        <div class="hero-content glass-card fade-in-up">
+            <div class="logo-wrapper">
+                <img src="image/es.png" alt="Ephemeral Sugar Logo" class="main-logo">
+            </div>
+            <h1 class="hero-title">Ephemeral Sugar</h1>
+            <p class="hero-subtitle">あなただけの世界で、<br>あなただけのお砂糖を。</p>
             
             <div class="cta-container">
                 <a href="https://forms.gle/rbYGxgWydM5aSsmr5" target="_blank" class="btn-primary">
-                    事前抽選に申し込む
+                    <span class="btn-text">事前抽選に申し込む</span>
+                    <span class="btn-sub">Request for Sugar</span>
                 </a>
                 <p class="cta-note">※開催日の一週間前から入力可能になります</p>
             </div>
         </div>
+        <div class="scroll-down"><span>Scroll</span></div>
     </header>
 
     <main>
         <section class="section-container">
-            <div class="glass-panel">
+            <div class="glass-panel js-scroll-trigger">
                 <h2 class="section-title">Event Info</h2>
                 <div class="info-grid">
                     <div class="info-item">
+                        <span class="info-label">Date</span>
                         <h3>開催日時</h3>
-                        <p>第二・第四 水曜日<br>22:00 ～ 22:40<br>（自由解散）</p>
+                        <p>第二・第四 水曜日<br>22:00 ～ 22:40<br><span class="small-text">（自由解散）</span></p>
                     </div>
                     <div class="info-item">
+                        <span class="info-label">Concept</span>
                         <h3>コンセプト</h3>
-                        <p>外でも個室でも近距離いちゃいちゃデート。<br>あなただけの甘い時間を。</p>
+                        <p>外でも個室でも<br>近距離いちゃいちゃデート。<br>あなただけの甘い時間を。</p>
                     </div>
                     <div class="info-item">
+                        <span class="info-label">System</span>
                         <h3>参加方法</h3>
                         <p>RPとフォーム入力による事前抽選。<br>気になるキャストを二人指名可能。</p>
                     </div>
                     <div class="info-item warning">
+                        <span class="info-label">Rule</span>
                         <h3>禁止事項</h3>
-                        <p>NSFW禁止<br>（Just行為、キスの強要等は禁止）</p>
+                        <p>NSFW禁止<br>Just行為、キスの強要等は禁止</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="section-container sweet-theme">
-            <div class="category-header">
-                <img src="image/ess.png" alt="Sweet Logo" class="sub-logo">
+            <div class="category-header js-scroll-trigger">
+                <div class="logo-wrapper-sm">
+                    <img src="image/ess.png" alt="Sweet Logo" class="sub-logo">
+                </div>
+                <h2 class="category-title">Sweet Side</h2>
                 <span class="hashtag">#vrc_ess</span>
             </div>
             
             <div class="cast-grid">
-                <article class="cast-card">
+                <article class="cast-card js-scroll-trigger">
                     <div class="card-image">
                         <img src="image/yunon.png" alt="ゆのん">
+                        <div class="overlay"></div>
                     </div>
                     <div class="card-content">
                         <h3>ゆのん</h3>
-                        <p class="quote">「猫ってね、大好きな人が他の猫に浮気するとすぐわかっちゃうんだよ。<br>君も同じくらいゆののこと愛してほしいな」</p>
+                        <p class="quote">「猫は好き？猫ってね、大好きな人が他の猫に浮気するとすぐわかっちゃうんだよ。<br>君も同じくらいゆののこと愛してほしいな」</p>
                     </div>
                 </article>
 
-                <article class="cast-card">
+                <article class="cast-card js-scroll-trigger">
                     <div class="card-image">
                         <img src="image/sui.png" alt="星彩すい">
+                         <div class="overlay"></div>
                     </div>
                     <div class="card-content">
                         <h3>星彩すい</h3>
@@ -80,9 +104,10 @@
                     </div>
                 </article>
 
-                <article class="cast-card">
+                <article class="cast-card js-scroll-trigger">
                     <div class="card-image">
                         <img src="image/nekoti.png" alt="ねこち！">
+                         <div class="overlay"></div>
                     </div>
                     <div class="card-content">
                         <h3>ねこち！</h3>
@@ -90,9 +115,10 @@
                     </div>
                 </article>
 
-                <article class="cast-card">
+                <article class="cast-card js-scroll-trigger">
                     <div class="card-image">
                         <img src="image/ikura.png" alt="いくらちゃん">
+                         <div class="overlay"></div>
                     </div>
                     <div class="card-content">
                         <h3>いくらちゃん</h3>
@@ -100,9 +126,10 @@
                     </div>
                 </article>
 
-                <article class="cast-card">
+                <article class="cast-card js-scroll-trigger">
                     <div class="card-image">
                         <img src="image/koitya.png" alt="恋茶うい">
+                         <div class="overlay"></div>
                     </div>
                     <div class="card-content">
                         <h3>恋茶うい</h3>
@@ -113,15 +140,19 @@
         </section>
 
         <section class="section-container bitter-theme">
-            <div class="category-header">
-                <img src="image/esb.png" alt="Bitter Logo" class="sub-logo">
+            <div class="category-header js-scroll-trigger">
+                <div class="logo-wrapper-sm">
+                    <img src="image/esb.png" alt="Bitter Logo" class="sub-logo">
+                </div>
+                <h2 class="category-title">Bitter Side</h2>
                 <span class="hashtag">#vrc_esb</span>
             </div>
 
             <div class="cast-grid">
-                <article class="cast-card">
+                <article class="cast-card js-scroll-trigger">
                     <div class="card-image">
                         <img src="image/yuumaru.png" alt="ゆうまる">
+                         <div class="overlay"></div>
                     </div>
                     <div class="card-content">
                         <h3>ゆうまる</h3>
@@ -129,9 +160,10 @@
                     </div>
                 </article>
 
-                <article class="cast-card">
+                <article class="cast-card js-scroll-trigger">
                     <div class="card-image">
                         <img src="image/nyatui.png" alt="にゃーつい">
+                         <div class="overlay"></div>
                     </div>
                     <div class="card-content">
                         <h3>にゃーつい</h3>
@@ -139,9 +171,10 @@
                     </div>
                 </article>
 
-                <article class="cast-card">
+                <article class="cast-card js-scroll-trigger">
                     <div class="card-image">
                         <img src="image/zakuro.png" alt="ざくろ">
+                         <div class="overlay"></div>
                     </div>
                     <div class="card-content">
                         <h3>ざくろ</h3>
@@ -149,9 +182,10 @@
                     </div>
                 </article>
 
-                <article class="cast-card">
+                <article class="cast-card js-scroll-trigger">
                     <div class="card-image">
                         <img src="image/asahi.png" alt="あさひちゃん">
+                         <div class="overlay"></div>
                     </div>
                     <div class="card-content">
                         <h3>あさひちゃん</h3>
@@ -159,9 +193,10 @@
                     </div>
                 </article>
 
-                <article class="cast-card">
+                <article class="cast-card js-scroll-trigger">
                     <div class="card-image">
                         <img src="image/yuno.png" alt="ゆの">
+                         <div class="overlay"></div>
                     </div>
                     <div class="card-content">
                         <h3>ゆの</h3>
@@ -173,7 +208,7 @@
     </main>
 
     <footer>
-        <div class="footer-glass">
+        <div class="footer-glass js-scroll-trigger">
             <h3>Ephemeral Sugar</h3>
             <div class="footer-links">
                 <a href="https://vrc.group/ESSB.8952" target="_blank">VRC Group</a>
@@ -183,6 +218,29 @@
             <p class="copyright">&copy; Ephemeral Sugar</p>
         </div>
     </footer>
+
+    <script>
+        // ローディングアニメーション
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.classList.add('loaded');
+            }, 1000); // 1秒後に消える
+        });
+
+        // スクロール時のフェードイン演出
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-active');
+                }
+            });
+        }, { threshold: 0.15 }); // 画面の15%が見えたら発動
+
+        document.querySelectorAll('.js-scroll-trigger').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 
 </body>
 </html>
