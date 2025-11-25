@@ -55,7 +55,7 @@ a {
     height: 100vh;
     z-index: -1;
     overflow: hidden;
-    pointer-events: none; /* クリックを邪魔しないように */
+    pointer-events: none;
 }
 
 .blob {
@@ -112,22 +112,22 @@ a {
     width: 100%;
 }
 
-/* ロゴのスタイル（正方形画像を丸くリッチに加工） */
+/* メインロゴのデザイン */
 .main-logo {
     width: 200px;
     height: 200px;
-    object-fit: cover; /* 画像の比率を崩さずトリミング */
+    object-fit: cover;
     margin: 0 auto 30px;
-    border-radius: 50%; /* 完全な円形にする */
+    border-radius: 50%; /* 完全な円形 */
     
-    /* ガラス細工のような光沢と立体感 */
+    /* ガラス風エフェクト */
     border: 5px solid rgba(255, 255, 255, 0.5);
     box-shadow: 
-        0 0 20px rgba(255, 255, 255, 0.8), /* 内側の発光 */
-        0 10px 30px rgba(0, 0, 0, 0.15), /* 外側の影 */
-        inset 0 0 15px rgba(255, 255, 255, 0.3); /* 立体感 */
+        0 0 20px rgba(255, 255, 255, 0.8),
+        0 10px 30px rgba(0, 0, 0, 0.15),
+        inset 0 0 15px rgba(255, 255, 255, 0.3);
     
-    /* ふわふわ浮かぶアニメーション */
+    /* 浮遊アニメーション */
     animation: logo-float 6s ease-in-out infinite;
     transition: all 0.5s ease;
 }
@@ -135,7 +135,7 @@ a {
 .main-logo:hover {
     transform: scale(1.05);
     box-shadow: 
-        0 0 30px rgba(230, 143, 172, 0.6), /* ピンクの光 */
+        0 0 30px rgba(230, 143, 172, 0.6),
         0 15px 40px rgba(0, 0, 0, 0.2);
     border-color: rgba(255, 255, 255, 0.8);
 }
@@ -242,48 +242,43 @@ a {
     margin-bottom: 60px;
 }
 
-/* =========================================
-   修正箇所：サブロゴ（Sweet & Bitter）のデザイン
-   ========================================= */
-
-/* 基本スタイル（メインロゴと同様のリッチな円形） */
+/* サブロゴ（Sweet / Bitter）のデザイン */
 .sub-logo {
-    width: 160px;  /* メイン(200px)より少し控えめなサイズ */
+    width: 160px;  /* メインより少し小さく */
     height: 160px; /* 正方形を維持 */
     object-fit: cover;
     margin: 0 auto 20px;
-    border-radius: 50%; /* 完全な円形 */
+    border-radius: 50%; /* 円形 */
     
-    /* ガラス細工のような枠線と影 */
+    /* ガラス風エフェクト */
     border: 4px solid rgba(255, 255, 255, 0.6);
     box-shadow: 
-        0 0 15px rgba(255, 255, 255, 0.8), /* 内側の発光 */
-        0 8px 25px rgba(0, 0, 0, 0.1),     /* 外側の影 */
-        inset 0 0 10px rgba(255, 255, 255, 0.3); /* 立体感 */
+        0 0 15px rgba(255, 255, 255, 0.8),
+        0 8px 25px rgba(0, 0, 0, 0.1),
+        inset 0 0 10px rgba(255, 255, 255, 0.3);
 
-    /* ふわふわ浮かぶアニメーション（少しタイミングをずらす） */
+    /* 浮遊アニメーション */
     animation: logo-float 6s ease-in-out infinite;
-    animation-delay: -1s; /* メインロゴと動きを少しずらして自然に */
+    animation-delay: -1s; /* メインと少しタイミングをずらす */
     transition: all 0.4s ease;
 }
 
-/* ホバー時の動き（共通） */
 .sub-logo:hover {
     transform: scale(1.08) translateY(-5px);
     border-color: rgba(255, 255, 255, 1);
 }
 
-/* Sweet（ピンク）エリアのロゴのホバー色 */
+/* Sweetのロゴホバー時：ピンク発光 */
 .sweet-theme .sub-logo:hover {
     box-shadow: 
-        0 0 30px rgba(230, 143, 172, 0.7), /* ピンクの強い光 */
+        0 0 30px rgba(230, 143, 172, 0.7),
         0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Bitter（ブルー）エリアのロゴのホバー色 */
+/* Bitterのロゴホバー時：ブルー発光 */
 .bitter-theme .sub-logo:hover {
     box-shadow: 
-        0 0 30px rgba(93, 117, 153, 0.7), /* ブルーの強い光 */
+        0 0 30px rgba(93, 117, 153, 0.7),
         0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
@@ -351,7 +346,6 @@ a {
     padding-bottom: 5px;
 }
 
-/* テーマごとの色分け */
 .sweet-theme .card-content h3 { border-color: #ffe0e9; color: var(--accent-sweet); }
 .bitter-theme .card-content h3 { border-color: #e0f2ff; color: var(--accent-bitter); }
 
@@ -359,7 +353,7 @@ a {
     font-size: 0.95rem;
     color: #666;
     margin: 0;
-    white-space: pre-line; /* 改行を反映 */
+    white-space: pre-line;
 }
 
 /* =========================================
@@ -416,6 +410,7 @@ footer {
     
     /* スマホではロゴを少し小さく */
     .main-logo { width: 150px; height: 150px; }
+    .sub-logo { width: 130px; height: 130px; }
     
     .section-title { font-size: 1.8rem; }
     
