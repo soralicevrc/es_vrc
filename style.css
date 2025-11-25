@@ -1,0 +1,229 @@
+/* ベース設定 */
+:root {
+    --text-main: #4a4a4a;
+    --sweet-color: #fff0f5; /* 薄いピンク */
+    --sweet-accent: #d87093;
+    --bitter-color: #f0f4f8; /* 薄いブルーグレー */
+    --bitter-accent: #5d7599;
+    --font-serif: 'Shippori Mincho', serif;
+    --font-sans: 'Noto Sans JP', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    color: var(--text-main);
+    background-color: #ffffff;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-serif);
+    letter-spacing: 0.05em;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ヒーローセクション */
+.hero {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #fff0f5 0%, #fff 50%, #f0f4f8 100%);
+    padding: 20px;
+}
+
+.main-logo {
+    max-width: 400px;
+    width: 80%;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: #888;
+    font-family: var(--font-serif);
+}
+
+/* セクション共通 */
+.section-container {
+    padding: 80px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 50px;
+    color: #333;
+}
+
+/* インフォメーション */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.info-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.info-card h3 {
+    margin-top: 0;
+    color: var(--bitter-accent);
+    font-size: 1.2rem;
+}
+
+.warning h3 {
+    color: #d9534f;
+}
+
+/* Sweet & Bitter セクション */
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.sub-logo {
+    max-width: 200px;
+    margin-bottom: 10px;
+}
+
+.hashtag {
+    font-size: 0.9rem;
+    color: #aaa;
+    letter-spacing: 0.1em;
+}
+
+.sweet-section {
+    background-color: rgba(255, 240, 245, 0.3);
+    border-radius: 20px;
+    margin-bottom: 40px;
+}
+
+.bitter-section {
+    background-color: rgba(240, 244, 248, 0.3);
+    border-radius: 20px;
+    margin-bottom: 40px;
+}
+
+/* キャストカード */
+.cast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.cast-card {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cast-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.cast-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover; /* 画像の比率を維持してトリミング */
+    object-position: top center;
+}
+
+.cast-info {
+    padding: 25px;
+}
+
+.cast-info h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.quote {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+    white-space: pre-line; /* 改行をそのまま表示 */
+}
+
+/* Sweet特有の色 */
+.sweet-section .cast-info h3 {
+    color: var(--sweet-accent);
+    border-color: var(--sweet-color);
+}
+
+/* Bitter特有の色 */
+.bitter-section .cast-info h3 {
+    color: var(--bitter-accent);
+    border-color: var(--bitter-color);
+}
+
+/* フッター */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.links {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.links a {
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid #fff;
+    padding: 8px 20px;
+    border-radius: 50px;
+    transition: background 0.3s;
+}
+
+.links a:hover {
+    background: #fff;
+    color: #333;
+}
+
+.copyright {
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* スマホ向けの調整 */
+@media (max-width: 768px) {
+    .hero {
+        height: 70vh;
+    }
+    
+    .section-container {
+        padding: 50px 15px;
+    }
+    
+    .cast-card img {
+        height: 250px;
+    }
+}
