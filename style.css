@@ -1,13 +1,17 @@
 /* =========================================
-   Base Settings
+   1. 基本設定 (Base Settings)
    ========================================= */
 :root {
     --text-color: #4a4a4a;
     --accent-sweet: #e68fac; /* 大人っぽいピンク */
     --accent-bitter: #5d7599; /* クールなブルーグレー */
     --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    
+    /* フォント設定 */
     --font-serif: 'Shippori Mincho', serif;
     --font-round: 'Zen Maru Gothic', sans-serif;
+    
+    /* ガラスモーフィズム用の変数 */
     --glass-bg: rgba(255, 255, 255, 0.7);
     --glass-border: 1px solid rgba(255, 255, 255, 0.8);
     --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
@@ -19,7 +23,7 @@ body {
     color: var(--text-color);
     background: var(--bg-gradient);
     line-height: 1.8;
-    background-attachment: fixed; /* 背景固定で高級感 */
+    background-attachment: fixed; /* 背景を固定して奥行きを出す */
     overflow-x: hidden;
 }
 
@@ -41,7 +45,7 @@ a {
 }
 
 /* =========================================
-   Background Animation (ふわふわ背景)
+   2. 背景アニメーション (Background Animation)
    ========================================= */
 .bg-decoration {
     position: fixed;
@@ -51,6 +55,7 @@ a {
     height: 100vh;
     z-index: -1;
     overflow: hidden;
+    pointer-events: none; /* クリックを邪魔しないように */
 }
 
 .blob {
@@ -84,7 +89,7 @@ a {
 }
 
 /* =========================================
-   Hero Section
+   3. ヒーローセクション (Hero Section)
    ========================================= */
 .hero {
     min-height: 90vh;
@@ -107,9 +112,37 @@ a {
     width: 100%;
 }
 
+/* ロゴのスタイル（正方形画像を丸くリッチに加工） */
 .main-logo {
-    width: 280px;
-    margin: 0 auto 25px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover; /* 画像の比率を崩さずトリミング */
+    margin: 0 auto 30px;
+    border-radius: 50%; /* 完全な円形にする */
+    
+    /* ガラス細工のような光沢と立体感 */
+    border: 5px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.8), /* 内側の発光 */
+        0 10px 30px rgba(0, 0, 0, 0.15), /* 外側の影 */
+        inset 0 0 15px rgba(255, 255, 255, 0.3); /* 立体感 */
+    
+    /* ふわふわ浮かぶアニメーション */
+    animation: logo-float 6s ease-in-out infinite;
+    transition: all 0.5s ease;
+}
+
+.main-logo:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 0 30px rgba(230, 143, 172, 0.6), /* ピンクの光 */
+        0 15px 40px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+@keyframes logo-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 .hero-subtitle {
@@ -119,6 +152,12 @@ a {
 }
 
 /* 抽選ボタン (CTA) */
+.cta-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .btn-primary {
     display: inline-block;
     background: linear-gradient(45deg, var(--accent-sweet), var(--accent-bitter));
@@ -140,11 +179,11 @@ a {
 .cta-note {
     font-size: 0.8rem;
     color: #888;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 /* =========================================
-   Sections
+   4. メインコンテンツ (Main Content)
    ========================================= */
 .section-container {
     max-width: 1100px;
@@ -152,6 +191,7 @@ a {
     padding: 0 20px;
 }
 
+/* イベント情報パネル */
 .glass-panel {
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(5px);
@@ -177,7 +217,6 @@ a {
     margin: 15px auto 0;
 }
 
-/* Info Grid */
 .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -196,7 +235,7 @@ a {
 }
 
 /* =========================================
-   Cast Sections
+   5. キャストセクション (Cast Layout)
    ========================================= */
 .category-header {
     text-align: center;
@@ -227,7 +266,7 @@ a {
     gap: 40px;
 }
 
-/* Cast Card Design */
+/* キャストカードのデザイン */
 .cast-card {
     background: white;
     border-radius: 20px;
@@ -243,14 +282,16 @@ a {
 }
 
 .card-image {
-    height: 350px; /* 写真を大きく見せる */
+    height: 350px;
     overflow: hidden;
+    position: relative;
 }
 
 .card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top center;
     transition: transform 0.5s ease;
 }
 
@@ -270,6 +311,7 @@ a {
     padding-bottom: 5px;
 }
 
+/* テーマごとの色分け */
 .sweet-theme .card-content h3 { border-color: #ffe0e9; color: var(--accent-sweet); }
 .bitter-theme .card-content h3 { border-color: #e0f2ff; color: var(--accent-bitter); }
 
@@ -277,11 +319,11 @@ a {
     font-size: 0.95rem;
     color: #666;
     margin: 0;
-    white-space: pre-line; /* 改行を有効に */
+    white-space: pre-line; /* 改行を反映 */
 }
 
 /* =========================================
-   Footer
+   6. フッター (Footer)
    ========================================= */
 footer {
     padding: 60px 20px;
@@ -319,13 +361,21 @@ footer {
     color: #333;
 }
 
+.copyright {
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
 /* =========================================
-   Mobile Optimization
+   7. スマホ対応 (Responsive Design)
    ========================================= */
 @media (max-width: 768px) {
     .hero { min-height: 80vh; }
     
     .glass-card { padding: 40px 20px; }
+    
+    /* スマホではロゴを少し小さく */
+    .main-logo { width: 150px; height: 150px; }
     
     .section-title { font-size: 1.8rem; }
     
